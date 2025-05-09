@@ -40,5 +40,5 @@ macos: SConstruct
 	$(MACOS)
 
 build: SConstruct
-	cd o && cmake  .. cmake --build .
+	cd o && cmake -G Ninja  .. &&  cmake --build .
 
