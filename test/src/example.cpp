@@ -12,6 +12,7 @@
 #include <godot_cpp/classes/multiplayer_api.hpp>
 #include <godot_cpp/classes/multiplayer_peer.hpp>
 #include <godot_cpp/classes/os.hpp>
+#include <godot_cpp/variant/typed_dictionary.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
 
 using namespace godot;
@@ -242,6 +243,8 @@ void Example::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("def_args", "a", "b"), &Example::def_args, DEFVAL(100), DEFVAL(200));
 	ClassDB::bind_method(D_METHOD("callable_bind"), &Example::callable_bind);
 	ClassDB::bind_method(D_METHOD("test_post_initialize"), &Example::test_post_initialize);
+
+	ClassDB::bind_method(D_METHOD("test_get_internal", "a"), &Example::test_get_internal);
 
 	GDVIRTUAL_BIND(_do_something_virtual, "name", "value");
 	ClassDB::bind_method(D_METHOD("test_virtual_implemented_in_script"), &Example::test_virtual_implemented_in_script);
@@ -739,6 +742,14 @@ String Example::test_library_path() {
 	String library_path;
 	internal::gdextension_interface_get_library_path(internal::library, library_path._native_ptr());
 	return library_path;
+}
+
+int64_t Example::test_get_internal(const Variant &p_input) const {
+	if (p_input.get_type() != Variant::INT) {
+		return -1;
+	}
+
+	return *VariantInternal::get_int(&p_input);
 }
 
 void ExampleRuntime::_bind_methods() {

@@ -28,8 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#ifndef GODOT_WRAPPED_HPP
-#define GODOT_WRAPPED_HPP
+#pragma once
 
 #include <godot_cpp/core/memory.hpp>
 
@@ -94,7 +93,7 @@ protected:
 	bool _property_can_revert(const StringName &p_name) const { return false; }
 	bool _property_get_revert(const StringName &p_name, Variant &r_property) const { return false; }
 	void _validate_property(PropertyInfo &p_property) const {}
-	String _to_string() const { return "[" + String(get_class_static()) + ":" + itos(get_instance_id()) + "]"; }
+	String _to_string() const { return "<Wrapped#0>"; }
 
 	static void notification_bind(GDExtensionClassInstancePtr p_instance, int32_t p_what, GDExtensionBool p_reversed) {}
 	static GDExtensionBool set_bind(GDExtensionClassInstancePtr p_instance, GDExtensionConstStringNamePtr p_name, GDExtensionConstVariantPtr p_value) { return false; }
@@ -120,10 +119,6 @@ public:
 	static const StringName &get_class_static() {
 		static const StringName string_name = StringName("Wrapped");
 		return string_name;
-	}
-
-	uint64_t get_instance_id() const {
-		return 0;
 	}
 
 	// Must be public but you should not touch this.
@@ -505,14 +500,9 @@ private:
 // Don't use this for your classes, use GDCLASS() instead.
 #define GDEXTENSION_CLASS(m_class, m_inherits) GDEXTENSION_CLASS_ALIAS(m_class, m_class, m_inherits)
 
-#define GDVIRTUAL_CALL(m_name, ...) _gdvirtual_##m_name##_call<false>(__VA_ARGS__)
-#define GDVIRTUAL_CALL_PTR(m_obj, m_name, ...) m_obj->_gdvirtual_##m_name##_call<false>(__VA_ARGS__)
-
-#define GDVIRTUAL_REQUIRED_CALL(m_name, ...) _gdvirtual_##m_name##_call<true>(__VA_ARGS__)
-#define GDVIRTUAL_REQUIRED_CALL_PTR(m_obj, m_name, ...) m_obj->_gdvirtual_##m_name##_call<true>(__VA_ARGS__)
+#define GDVIRTUAL_CALL(m_name, ...) _gdvirtual_##m_name##_call(__VA_ARGS__)
+#define GDVIRTUAL_CALL_PTR(m_obj, m_name, ...) m_obj->_gdvirtual_##m_name##_call(__VA_ARGS__)
 
 #define GDVIRTUAL_BIND(m_name, ...) ::godot::ClassDB::add_virtual_method(get_class_static(), _gdvirtual_##m_name##_get_method_info(), ::godot::snarray(__VA_ARGS__));
 #define GDVIRTUAL_IS_OVERRIDDEN(m_name) _gdvirtual_##m_name##_overridden()
 #define GDVIRTUAL_IS_OVERRIDDEN_PTR(m_obj, m_name) m_obj->_gdvirtual_##m_name##_overridden()
-
-#endif // GODOT_WRAPPED_HPP

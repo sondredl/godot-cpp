@@ -28,8 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#ifndef GODOT_GODOT_HPP
-#define GODOT_GODOT_HPP
+#pragma once
 
 #include <gdextension_interface.h>
 
@@ -88,6 +87,7 @@ extern "C" GDExtensionInterfaceVariantCanConvert gdextension_interface_variant_c
 extern "C" GDExtensionInterfaceVariantCanConvertStrict gdextension_interface_variant_can_convert_strict;
 extern "C" GDExtensionInterfaceGetVariantFromTypeConstructor gdextension_interface_get_variant_from_type_constructor;
 extern "C" GDExtensionInterfaceGetVariantToTypeConstructor gdextension_interface_get_variant_to_type_constructor;
+extern "C" GDExtensionInterfaceGetVariantGetInternalPtrFunc gdextension_interface_variant_get_ptr_internal_getter;
 extern "C" GDExtensionInterfaceVariantGetPtrOperatorEvaluator gdextension_interface_variant_get_ptr_operator_evaluator;
 extern "C" GDExtensionInterfaceVariantGetPtrBuiltinMethod gdextension_interface_variant_get_ptr_builtin_method;
 extern "C" GDExtensionInterfaceVariantGetPtrConstructor gdextension_interface_variant_get_ptr_constructor;
@@ -197,6 +197,7 @@ extern "C" GDExtensionInterfaceClassdbUnregisterExtensionClass gdextension_inter
 extern "C" GDExtensionInterfaceGetLibraryPath gdextension_interface_get_library_path;
 extern "C" GDExtensionInterfaceEditorAddPlugin gdextension_interface_editor_add_plugin;
 extern "C" GDExtensionInterfaceEditorRemovePlugin gdextension_interface_editor_remove_plugin;
+extern "C" GDExtensionInterfaceEditorRegisterGetClassesUsedCallback gdextension_interface_editor_register_get_classes_used_callback;
 extern "C" GDExtensionsInterfaceEditorHelpLoadXmlFromUtf8Chars gdextension_interface_editor_help_load_xml_from_utf8_chars;
 extern "C" GDExtensionsInterfaceEditorHelpLoadXmlFromUtf8CharsAndLen gdextension_interface_editor_help_load_xml_from_utf8_chars_and_len;
 extern "C" GDExtensionInterfaceImagePtrw gdextension_interface_image_ptrw;
@@ -264,5 +265,3 @@ public:
 };
 
 } // namespace godot
-
-#endif // GODOT_GODOT_HPP

@@ -3,8 +3,7 @@
  * This is free and unencumbered software released into the public domain.
  */
 
-#ifndef EXAMPLE_CLASS_H
-#define EXAMPLE_CLASS_H
+#pragma once
 
 // We don't need windows.h in this example plugin but many others do, and it can
 // lead to annoying situations due to the ton of macros it defines.
@@ -21,7 +20,9 @@
 #include <godot_cpp/classes/tile_map.hpp>
 #include <godot_cpp/classes/tile_set.hpp>
 #include <godot_cpp/classes/viewport.hpp>
+#include <godot_cpp/variant/typed_dictionary.hpp>
 #include <godot_cpp/variant/variant.hpp>
+#include <godot_cpp/variant/variant_internal.hpp>
 
 #include <godot_cpp/core/binder_common.hpp>
 #include <godot_cpp/core/gdvirtual.gen.inc>
@@ -185,6 +186,8 @@ public:
 
 	bool test_post_initialize() const;
 
+	int64_t test_get_internal(const Variant &p_input) const;
+
 	// Static method.
 	static int test_static(int p_a, int p_b);
 	static void test_static2();
@@ -285,5 +288,3 @@ protected:
 public:
 	String get_the_word() const;
 };
-
-#endif // EXAMPLE_CLASS_H
