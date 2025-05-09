@@ -72,3 +72,21 @@ endif()
 USE_FOLDERS flag will organize godot-cpp targets under a subfolder named
 'godot-cpp'. This is enable by default from CMake version 3.26 ]]
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
+cmake_minimum_required(VERSION 3.16)
+project(godot_cpp_bindings)
+
+set(CMAKE_CXX_STANDARD 17)
+
+# Point to godot headers and bindings
+include_directories(
+    src
+    include
+)
+
+file(GLOB_RECURSE SRC_FILES ../src/*.cpp ../test/src/*.cpp)
+
+# add_library(godot-cpp STATIC ${SRC_FILES})
+
+# Platform-specific flags can be added here
+# target_compile_definitions(...)
