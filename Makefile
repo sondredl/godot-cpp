@@ -38,3 +38,7 @@ windows64: SConstruct
 
 macos: SConstruct
 	$(MACOS)
+
+build: SConstruct
+	cd o && cmake  .. cmake --build .
+
